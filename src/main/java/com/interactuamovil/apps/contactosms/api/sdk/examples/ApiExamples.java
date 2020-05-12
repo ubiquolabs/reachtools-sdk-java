@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
  */
 class ApiExamples {
 
-    private static final Logger logger = Logger.getLogger(ApiExamples.class);
+    //private static final Logger logger = Logger.getLogger(ApiExamples.class);
 
     private ApiExamples() {}
 
@@ -49,11 +49,11 @@ class ApiExamples {
             contactsExample.test();
 
         } catch (IOException e) {
-            logger.debug(e.getMessage());
+            //logger.debug(e.getMessage());
         } catch (InvalidKeyException e) {
-            logger.debug(e.getMessage());
+            //logger.debug(e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            logger.debug(e.getMessage());
+            //logger.debug(e.getMessage());
         }
 
     }
