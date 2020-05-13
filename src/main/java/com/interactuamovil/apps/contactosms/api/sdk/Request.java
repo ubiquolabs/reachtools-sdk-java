@@ -105,16 +105,16 @@ abstract class Request {
         connection.setRequestMethod(requestType);
         connection.setDoInput(true);
         if (!requestType.equals("GET") && !requestType.equals("DELETE")) {
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
 
         }
         connection.setRequestProperty("Content-Length", "" + Integer.toString(bodyParams.getBytes().length));
         connection.setRequestProperty("Date", httpDate);
-        connection.setRequestProperty("Authorization", auth);
+        //connection.setRequestProperty("Authorization", auth);
         connection.setRequestProperty("Accept", "*/*");
         
-        connection.setRequestProperty("X-IM-ORIGIN", "IM_SDK_JAVA");
+        connection.setRequestProperty("X-IM-ORIGIN", "REACH_TOOLS_SDK_JAVA");
         //connection.setRequestProperty("X-IM-USERNAME", "java");
         
         connection.setUseCaches(false);

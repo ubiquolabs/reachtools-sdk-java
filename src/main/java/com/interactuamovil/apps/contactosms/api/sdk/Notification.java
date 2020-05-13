@@ -72,9 +72,9 @@ public class Notification extends Request{
         NotificationJson notificationResponse;
 
         try {
-            response = doRequest("notifications", "post", null, notification, true);
+            response = doRequest("notifications", "post", null, notification, false);
             if (response.isOk()) {
-                notificationResponse = JsonObjectCollection.fromJson(response.getRawResponse(), new TypeReference<NotificationJson>() {});
+                notificationResponse = NotificationJson.fromJson(response.getRawResponse());
                 response.setResponse(notificationResponse);
             }
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.interactuamovil.apps.contactosms.api.sdk.examples;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interactuamovil.apps.contactosms.api.sdk.Notification;
 import com.interactuamovil.apps.contactosms.api.utils.JsonObject;
 import org.apache.commons.configuration.Configuration;
@@ -26,19 +27,21 @@ public class NotificationExample extends BaseExample{
 
     @Override
     public void configure(){
+        ObjectMapper mapper = new ObjectMapper();
+        String paramsStr = getConfig().getString("test_params");
+
         testMsisdn = getConfig().getString("test_msisdn");
         testDestination = getConfig().getString("test_destination");
         testTemplateSms = getConfig().getString("test_template_sms");
         testTemplateEmail = getConfig().getString("test_template_email");
         testContentParams = getConfig().getString("test_content_params");
         testMessage = getConfig().getString("test_message");
-        //Properties paramsVariablesStr = getConfig().get
+
         try{
-            //testParamsVariables = JsonObject.fromJson(paramsVariablesStr, JsonNode.class);
+            testParamsVariables = mapper.readTree(paramsStr);
         } catch(Exception e){
 
         }
-
 
         if (null == testMsisdn || null == testDestination || null == testTemplateSms
                 || null == testTemplateEmail || null == testContentParams || null == testMessage) {
@@ -55,8 +58,8 @@ public class NotificationExample extends BaseExample{
         Notification notificationApi = new Notification(
                 getApiKey(), getApiSecretKey(), getApiUri()
         );
-        //notificationApi.sendTemplateSms(testMsisdn, testTemplateSms, testParamsVariables);
-        notificationApi.sendSingleSms(testMsisdn, testMessage);
+        notificationApi.sendTemplateSms(testMsisdn, testTemplateSms, testParamsVariables);
+        //notificationApi.sendSingleSms(testMsisdn, testMessage);
         //notificationApi.sendSingleEmail(testDestination, testTemplateEmail, testMessage, testContentParams);
     }
 }
