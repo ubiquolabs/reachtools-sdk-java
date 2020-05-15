@@ -1,5 +1,6 @@
 package com.interactuamovil.apps.contactosms.api.client.rest.Notification;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.interactuamovil.apps.contactosms.api.enums.NotificationType;
@@ -8,6 +9,7 @@ import com.sun.istack.internal.NotNull;
 
 import java.io.IOException;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NotificationJson extends JsonObject {
     @JsonProperty(value="destination")
     private DestinationProperty destination;

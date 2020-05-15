@@ -4,10 +4,13 @@
  */
 package com.interactuamovil.apps.contactosms.api.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  *
  * @author sergeiw
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorJsonResponse extends JsonObject {
     
     private Integer code;

@@ -6,6 +6,7 @@ import com.interactuamovil.apps.contactosms.api.client.rest.Notification.Content
 import com.interactuamovil.apps.contactosms.api.client.rest.Notification.DestinationProperty;
 import com.interactuamovil.apps.contactosms.api.client.rest.Notification.NotificationJson;
 import com.interactuamovil.apps.contactosms.api.enums.NotificationType;
+import com.interactuamovil.apps.contactosms.api.sdk.responses.NotificationResponse;
 import com.interactuamovil.apps.contactosms.api.utils.ApiResponse;
 import com.interactuamovil.apps.contactosms.api.utils.JsonObjectCollection;
 import org.apache.log4j.Logger;
@@ -19,7 +20,7 @@ public class Notification extends Request{
         super(apiKey, secretKey, apiUri);
     }
 
-    public ApiResponse<NotificationJson> sendTemplateSms(String msisdn, String templateSms, JsonNode params){
+    public ApiResponse<NotificationResponse> sendSms(String msisdn, String templateSms, JsonNode params){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
 
@@ -33,7 +34,7 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
-    public ApiResponse<NotificationJson> sendSingleSms(String msisdn, String message){
+    public ApiResponse<NotificationResponse> sendSms(String msisdn, String message){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
         ContentProperty contentProperty = new ContentProperty();
@@ -49,14 +50,12 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
-    public ApiResponse<NotificationJson> sendSingleEmail(String destination, String templateEmail, String message, String params){
+    public ApiResponse<NotificationResponse> sendEmail(String destination, String message){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
         ContentProperty contentProperty = new ContentProperty();
 
         destinationProperty.setEmail(destination);
-        contentProperty.setTemplate(templateEmail);
-        contentProperty.setParams(params);
         contentProperty.setMessage(message);
 
         notification.setApiKey(this.getApiKey());
@@ -67,14 +66,31 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
-    public ApiResponse<NotificationJson> sendNotification(NotificationJson notification){
-        ApiResponse<NotificationJson> response;
-        NotificationJson notificationResponse;
+    public ApiResponse<NotificationResponse> sendEmail(String destination, String templateEmail, JsonNode params){
+        NotificationJson notification = new NotificationJson();
+        DestinationProperty destinationProperty = new DestinationProperty();
+        ContentProperty contentProperty = new ContentProperty();
+
+        destinationProperty.setEmail(destination);
+        contentProperty.setTemplate(templateEmail);
+
+        notification.setApiKey(this.getApiKey());
+        notification.setType(NotificationType.EMAIL);
+        notification.setDestination(destinationProperty);
+        notification.setContent(contentProperty);
+        notification.setParams(params);
+
+        return sendNotification(notification);
+    }
+
+    public ApiResponse<NotificationResponse> sendNotification(NotificationJson notification){
+        ApiResponse<NotificationResponse> response;
+        NotificationResponse notificationResponse;
 
         try {
             response = doRequest("notifications", "post", null, notification, false);
             if (response.isOk()) {
-                notificationResponse = NotificationJson.fromJson(response.getRawResponse());
+                notificationResponse = NotificationResponse.fromJson(response.getRawResponse());
                 response.setResponse(notificationResponse);
             }
         } catch (Exception e) {
