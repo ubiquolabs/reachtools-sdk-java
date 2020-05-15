@@ -83,6 +83,22 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    public ApiResponse<NotificationResponse> sendPush(String tokenPushId, String message){
+        NotificationJson notification = new NotificationJson();
+        DestinationProperty destinationProperty = new DestinationProperty();
+        ContentProperty contentProperty = new ContentProperty();
+
+        destinationProperty.setTokenPushId(tokenPushId);
+        contentProperty.setMessage(message);
+
+        notification.setApiKey(this.getApiKey());
+        notification.setType(NotificationType.PUSH);
+        notification.setDestination(destinationProperty);
+        notification.setContent(contentProperty);
+
+        return sendNotification(notification);
+    }
+
     public ApiResponse<NotificationResponse> sendNotification(NotificationJson notification){
         ApiResponse<NotificationResponse> response;
         NotificationResponse notificationResponse;

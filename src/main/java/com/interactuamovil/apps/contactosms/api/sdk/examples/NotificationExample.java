@@ -13,6 +13,7 @@ public class NotificationExample extends BaseExample{
 
     private String testMsisdn = null;
     private String testDestination = null;
+    private String testTokenPushId = null;
     private String testTemplateSms = null;
     private String testTemplateEmail = null;
     private String testMessage = null;
@@ -31,6 +32,7 @@ public class NotificationExample extends BaseExample{
 
         testMsisdn = getConfig().getString("test_msisdn");
         testDestination = getConfig().getString("test_destination");
+        testTokenPushId = getConfig().getString("test_token_push_id");
         testTemplateSms = getConfig().getString("test_template_sms");
         testTemplateEmail = getConfig().getString("test_template_email");
         testMessage = getConfig().getString("test_message");
@@ -42,8 +44,8 @@ public class NotificationExample extends BaseExample{
 
         }
 
-        if (null == testMsisdn || null == testDestination || null == testTemplateSms
-                || null == testTemplateEmail || null == testMessage
+        if (null == testMsisdn || null == testDestination || null == testTokenPushId
+                || null == testTemplateSms || null == testTemplateEmail || null == testMessage
                 || null == testParamsEmail || null == testParamsSms) {
             throw new AssertionError(
                     "Please add contact configurations:"
@@ -58,9 +60,10 @@ public class NotificationExample extends BaseExample{
         Notification notificationApi = new Notification(
                 getApiKey(), getApiSecretKey(), getApiUri()
         );
-        //notificationApi.sendSms(testMsisdn, testMessage);
+        notificationApi.sendSms(testMsisdn, testMessage);
         notificationApi.sendSms(testMsisdn, testTemplateSms, testParamsSms);
-        //notificationApi.sendEmail(testDestination, testMessage);
-        //notificationApi.sendEmail(testDestination, testTemplateEmail, testParamsEmail);
+        notificationApi.sendEmail(testDestination, testMessage);
+        notificationApi.sendEmail(testDestination, testTemplateEmail, testParamsEmail);
+        //notificationApi.sendPush(testTokenPushId, testMessage);
     }
 }

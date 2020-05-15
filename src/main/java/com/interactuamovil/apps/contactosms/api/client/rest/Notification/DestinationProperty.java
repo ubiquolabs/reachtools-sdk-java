@@ -7,6 +7,8 @@ public class DestinationProperty {
     private String msisdn;
     @JsonProperty(value="email")
     private String email;
+    @JsonProperty(value="token_push_id")
+    private String tokenPushId;
 
     public DestinationProperty(){}
 
@@ -25,4 +27,8 @@ public class DestinationProperty {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getTokenPushId() { return tokenPushId; }
+
+    public void setTokenPushId(String tokenPushId) { this.tokenPushId = tokenPushId; }
 }
