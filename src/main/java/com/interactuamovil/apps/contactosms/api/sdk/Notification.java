@@ -1,6 +1,5 @@
 package com.interactuamovil.apps.contactosms.api.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.interactuamovil.apps.contactosms.api.client.rest.Notification.ContentProperty;
 import com.interactuamovil.apps.contactosms.api.client.rest.Notification.DestinationProperty;
@@ -8,10 +7,8 @@ import com.interactuamovil.apps.contactosms.api.client.rest.Notification.Notific
 import com.interactuamovil.apps.contactosms.api.enums.NotificationType;
 import com.interactuamovil.apps.contactosms.api.sdk.responses.NotificationResponse;
 import com.interactuamovil.apps.contactosms.api.utils.ApiResponse;
-import com.interactuamovil.apps.contactosms.api.utils.JsonObjectCollection;
 import org.apache.log4j.Logger;
 
-import java.util.List;
 
 public class Notification extends Request{
     private static final Logger logger = Logger.getLogger(Notification.class);
@@ -20,6 +17,13 @@ public class Notification extends Request{
         super(apiKey, secretKey, apiUri);
     }
 
+    /**
+     * Send template SMS
+     * @param msisdn Destination msisdn
+     * @param templateSms Template SMS ID
+     * @param params Variables to replace on template. If there is not, send null.
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendSms(String msisdn, String templateSms, JsonNode params){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
@@ -34,6 +38,12 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    /**
+     * Send single SMS
+     * @param msisdn Destination msisdn
+     * @param message Message to send
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendSms(String msisdn, String message){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
@@ -50,6 +60,12 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    /**
+     * Send single Email
+     * @param destination Destination Email
+     * @param message Message to send
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendEmail(String destination, String message){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
@@ -66,6 +82,13 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    /**
+     * Send template Email
+     * @param destination Destination Email
+     * @param templateEmail Template Email ID
+     * @param params Variables to replace on template. If there is not, send null.
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendEmail(String destination, String templateEmail, JsonNode params){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
@@ -83,6 +106,12 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    /**
+     * Send push notification
+     * @param tokenPushId Destination token push ID
+     * @param message Message to send
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendPush(String tokenPushId, String message){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
@@ -99,6 +128,11 @@ public class Notification extends Request{
         return sendNotification(notification);
     }
 
+    /**
+     * Send push notification
+     * @param notification NotificationJson object
+     * @return NotificationResponse
+     */
     public ApiResponse<NotificationResponse> sendNotification(NotificationJson notification){
         ApiResponse<NotificationResponse> response;
         NotificationResponse notificationResponse;
