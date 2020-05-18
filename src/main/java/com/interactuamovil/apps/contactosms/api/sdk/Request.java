@@ -111,11 +111,11 @@ abstract class Request {
         }
         connection.setRequestProperty("Content-Length", "" + Integer.toString(bodyParams.getBytes().length));
         connection.setRequestProperty("Date", httpDate);
-        //connection.setRequestProperty("Authorization", auth);
+        connection.setRequestProperty("Authorization", auth);
         connection.setRequestProperty("Accept", "*/*");
         
         connection.setRequestProperty("X-IM-ORIGIN", "REACH_TOOLS_SDK_JAVA");
-        //connection.setRequestProperty("X-IM-USERNAME", "java");
+        connection.setRequestProperty("X-IM-USERNAME", "java");
         
         connection.setUseCaches(false);
         
