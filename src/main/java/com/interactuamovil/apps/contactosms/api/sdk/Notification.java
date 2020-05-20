@@ -20,11 +20,11 @@ public class Notification extends Request{
     /**
      * Send template SMS
      * @param msisdn Destination msisdn
-     * @param templateSms Template SMS ID
+     * @param templateUid Template SMS ID
      * @param params Variables to replace on template. If there is not, send null.
      * @return NotificationResponse
      */
-    public ApiResponse<NotificationResponse> sendSms(String msisdn, String templateSms, JsonNode params){
+    public ApiResponse<NotificationResponse> sendSms(String msisdn, String templateUid, JsonNode params){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
 
@@ -32,7 +32,7 @@ public class Notification extends Request{
         notification.setApiKey(this.getApiKey());
         notification.setType(NotificationType.SMS);
         notification.setDestination(destinationProperty);
-        notification.setTemplate(templateSms);
+        notification.setTemplate(templateUid);
         notification.setParams(params);
 
         return sendNotification(notification);
@@ -85,17 +85,17 @@ public class Notification extends Request{
     /**
      * Send template Email
      * @param destination Destination Email
-     * @param templateEmail Template Email ID
+     * @param templateUid Template Email ID
      * @param params Variables to replace on template. If there is not, send null.
      * @return NotificationResponse
      */
-    public ApiResponse<NotificationResponse> sendEmail(String destination, String templateEmail, JsonNode params){
+    public ApiResponse<NotificationResponse> sendEmail(String destination, String templateUid, JsonNode params){
         NotificationJson notification = new NotificationJson();
         DestinationProperty destinationProperty = new DestinationProperty();
         ContentProperty contentProperty = new ContentProperty();
 
         destinationProperty.setEmail(destination);
-        contentProperty.setTemplate(templateEmail);
+        contentProperty.setTemplate(templateUid);
 
         notification.setApiKey(this.getApiKey());
         notification.setType(NotificationType.EMAIL);

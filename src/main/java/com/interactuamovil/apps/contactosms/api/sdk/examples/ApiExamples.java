@@ -12,8 +12,8 @@ import java.security.NoSuchAlgorithmException;
 
 
 /**
- * @author Pablo Rosales
- * @copyright InteractúaMóvil 2012
+ * @author Francisco Hernandez
+ * @copyright Ubiquo 2020
  */
 class ApiExamples {
 
