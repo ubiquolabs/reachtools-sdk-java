@@ -47,21 +47,19 @@ Donde:
 * EMAIL_TEMPLATE_ID (**String**): ID de plantilla Email válida
 
 Y:
-* EMAIL_PARAMS (**JsonNode**): Variables a reemplazar en la plantilla de Email (Si no hay variables que reemplazar, enviar **null**). Este debe poseer el siguiente formáto:
+* EMAIL_PARAMS (**JsonNode**): Variables a reemplazar en la plantilla de Email (Si no hay variables que reemplazar, enviar **null**). Ejemplo del formato del JsonNode:
 ```json
 {
   "var1" : "value1",
-  "var2" : "value2",
-  ...
+  "var2" : "value2"
 }
 ```
-* SMS_PARAMS (**JsonNode**): Variables a reemplazar en la plantilla de SMS (Si no hay variables que reemplazar, enviar **null**). Este debe poseer el siguiente formáto:
+* SMS_PARAMS (**JsonNode**): Variables a reemplazar en la plantilla de SMS (Si no hay variables que reemplazar, enviar **null**). Ejemplo del formato del JsonNode:
 ```json
 {
   "variables" : {
     "var1" : "value1",
     "var2" : "value2",
-    ...
   }
 }
 ```
